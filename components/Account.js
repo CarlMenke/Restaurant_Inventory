@@ -1,23 +1,30 @@
 import { StyleSheet, Text, View, TextInput, Button } from 'react-native';
 import { useState } from 'react';
-import { connect } from 'react-redux';
 import { setUserName } from '../redux/actions'
-import { bindActionCreators } from 'redux';
 import { useSelector, useDispatch } from 'react-redux';
 
-export const SET_USERNAME = "SET_USERNAME"
+export default function  Account(){
 
-
-
-const  Account = () => {
-
-    const dispatch = useDispatch()
-
-    const { userName } = useSelector(state => state.userReducer)
+    //component scope state
     const [ userNameInput, setUserNameInput ] = useState("")
-
-
+    
+    //used to update the store through an aciton
+    const dispatch = useDispatch()
     const setUserNameAction = () => dispatch(setUserName(userNameInput))
+    
+    //used to get data from the reducer which gets it from the store
+    const { userName } = useSelector(state => state.reducer)
+
+    //component scope styling
+    const styles = StyleSheet.create({
+        container: {
+          flex: 1,
+          flexDirection: "column",
+          backgroundColor: "#fed",
+          alignItems: 'center',
+          justifyContent: 'center',
+        },
+    });
 
     return (
         <View style={styles.container}>
@@ -34,28 +41,3 @@ const  Account = () => {
         </View>
     )
 }
-
-const styles = StyleSheet.create({
-    container: {
-      flex: 1,
-      flexDirection: "column",
-      backgroundColor: '#dfe',
-      alignItems: 'center',
-      justifyContent: 'center',
-    },
-});
-
-const mapStateToProps = state => ({
-    userName : state.userName
-})
-
-const ActionCreators = Object.assign(
-    {},
-    setUserName,
-)
-
-const mapDispatchToProps = dispatch => ({
-    actions: bindActionCreators(ActionCreators, dispatch),
-})
-
-export default connect(mapStateToProps, mapDispatchToProps)(Account)
