@@ -1,10 +1,11 @@
 import { StyleSheet, Text, View, Button } from 'react-native';
 import { useDispatch } from 'react-redux';
+import { setIsSignedIn } from '../redux/actions';
 
 export default function RegistrationScreen() {
 
     const dispatch = useDispatch()
-    const setIsSignedIn = () => dispatch(setIsSignedIn(true))
+    const setIsSignedInAction = () => dispatch(setIsSignedIn(true))
 
     const styles = StyleSheet.create({
         container: {
@@ -20,7 +21,7 @@ export default function RegistrationScreen() {
         <View style={styles.container}>
             <Text>Login Or Signup</Text>
             <Button
-                onPress = {setIsSignedIn}
+                onPress = {setIsSignedInAction}
                 title = "Enter" />
         </View>
     )
