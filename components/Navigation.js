@@ -13,7 +13,6 @@ const Tab = createBottomTabNavigator();
 export default function Navigation() {
 
     const { isSignedIn } = useSelector(state => state.reducer)
-
     const styles = StyleSheet.create({
         container: {
           flex: 1,
