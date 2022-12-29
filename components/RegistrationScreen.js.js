@@ -1,6 +1,7 @@
 import { StyleSheet, Text, View, Button } from 'react-native';
 import { useDispatch } from 'react-redux';
 import { setIsSignedIn } from '../redux/actions';
+import { firebase } from '../firebaseConfig'
 
 export default function RegistrationScreen() {
 
@@ -12,6 +13,7 @@ export default function RegistrationScreen() {
     //maybe be able to watch a firebase documents? subscriptions?
     //first be able to read and write from a database
     //second anuthenticate all the calls to and from the database  (research the professional ways that acceptable with apple)
+
     const styles = StyleSheet.create({
         container: {
           flex: 1,
