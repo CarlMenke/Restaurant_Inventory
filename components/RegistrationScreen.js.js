@@ -2,7 +2,8 @@ import { StyleSheet, Text, View, Button, TextInput } from 'react-native';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { setIsSignedIn } from '../redux/actions';
-import { db } from '../firebaseConfig'
+import { db, auth } from '../firebaseConfig'
+
 import {
   ref,
   onValue,
@@ -19,20 +20,13 @@ export default function RegistrationScreen() {
 
     const [userName, setUserName] = useState()
     const [password, setPassword] = useState()
-
-    // const signInAttempt = async () => {
-    //   const data = {
-    //     userName: userName,
-    //     password: password
-    //   }
-    //   const res = await db.collection('users').add(data)
-    //   console.log(res)
-    // }
+    const userId = auth.currentUser.uid
 
     const signInAttempt = async () => {
       push(ref(db, '/users'), {
         userName: userName,
-        password: password
+        password: password,
+        id: userId
       })
     }
  
