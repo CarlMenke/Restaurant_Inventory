@@ -1,7 +1,15 @@
 import { StyleSheet, Text, View, Button, TextInput } from 'react-native';
+import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { setIsSignedIn } from '../redux/actions';
-import { firebaseConfig } from '../firebaseConfig'
+import { db } from '../firebaseConfig'
+import {
+  ref,
+  onValue,
+  push,
+  update,
+  remove
+} from 'firebase/database';
 
 export default function RegistrationScreen() {
 
@@ -12,13 +20,20 @@ export default function RegistrationScreen() {
     const [userName, setUserName] = useState()
     const [password, setPassword] = useState()
 
+    // const signInAttempt = async () => {
+    //   const data = {
+    //     userName: userName,
+    //     password: password
+    //   }
+    //   const res = await db.collection('users').add(data)
+    //   console.log(res)
+    // }
+
     const signInAttempt = async () => {
-      const data = {
+      push(ref(db, '/users'), {
         userName: userName,
         password: password
-      }
-      const res = await firebaseConfig.collection('users').add(data)
-      console.log(res)
+      })
     }
  
     //YOU SHOULD BE ABLE TO WRITE TO A FIREBASE DATABASE FROM HERE
