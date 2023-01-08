@@ -12,7 +12,7 @@ const Tab = createBottomTabNavigator();
 
 export default function Navigation() {
 
-    const { isSignedIn } = useSelector(state => state.reducer)
+    const { user } = useSelector(state => state.reducer)
 
     const styles = StyleSheet.create({
         container: {
@@ -24,7 +24,7 @@ export default function Navigation() {
         },
     });
 
-      if(isSignedIn){
+      if(user){
         return (
             <NavigationContainer>
                 <Tab.Navigator>

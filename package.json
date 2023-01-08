@@ -23,6 +23,7 @@
     "@react-navigation/native": "^6.1.1",
     "@react-navigation/native-stack": "^6.9.6",
     "@react-navigation/stack": "^6.3.9",
+    "bcrypt-react-native": "^1.1.1",
     "expo": "~47.0.8",
     "expo-build-properties": "^0.4.1",
     "expo-dev-client": "~2.0.1",

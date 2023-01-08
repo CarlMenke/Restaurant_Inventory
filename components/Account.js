@@ -1,19 +1,21 @@
 import { StyleSheet, Text, View, TextInput, Button } from 'react-native';
 import { useState } from 'react';
-import { setUserName } from '../redux/actions'
+import { setUser } from '../redux/actions'
 import { useSelector, useDispatch } from 'react-redux';
 
 export default function  Account(){
-
-    //component scope state
-    const [ userNameInput, setUserNameInput ] = useState("")
     
     //used to update the store through an aciton
     const dispatch = useDispatch()
-    const setUserNameAction = () => dispatch(setUserName(userNameInput))
+    const setUserAction = (user) => dispatch(setUser(user))
     
     //used to get data from the reducer which gets it from the store
-    const { userName } = useSelector(state => state.reducer)
+    const { user } = useSelector(state => state.reducer)
+    
+
+    const logout = () => {
+        setUserAction(null)
+    }
 
     //component scope styling
     const styles = StyleSheet.create({
@@ -28,15 +30,10 @@ export default function  Account(){
 
     return (
         <View style={styles.container}>
-            <Text > Username: {userName}</Text>
-            <TextInput
-                onChangeText = {setUserNameInput}
-                value = {userNameInput}
-                placeholder = "Enter Username"
-            />
+            <Text > Signed In As: {user.name}</Text>
             <Button
-                onPress = {setUserNameAction}
-                title = "Enter"
+                onPress={logout}
+                title={"Logout"}
             />
         </View>
     )

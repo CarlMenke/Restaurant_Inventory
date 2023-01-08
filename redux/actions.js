@@ -1,16 +1,8 @@
-export const SET_USERNAME = "SET_USERNAME"
-export const SET_ISSIGNEDIN = "SET_ISSIGNEDIN"
+export const SET_USER= "SET_USER"
 
-export const setUserName = (name) => dispatch => {
+export const setUser = (user) => dispatch => {
     dispatch({
-        type : SET_USERNAME,
-        payload : name
-    })
-}
-
-export const setIsSignedIn = (bool) => dispatch => {
-    dispatch({
-        type: SET_ISSIGNEDIN,
-        payload: bool
+        type : SET_USER,
+        payload : user
     })
 }

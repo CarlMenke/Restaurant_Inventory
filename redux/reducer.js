@@ -1,22 +1,15 @@
-import { SET_USERNAME } from "./actions";
-import { SET_ISSIGNEDIN } from "./actions";
+import { SET_USER } from "./actions";
 
 const initialState = {
-    userName : "",
-    isSignedIn: false
+    user: null
 }
 
 const reducer = (state = initialState, action) => {
     switch(action.type) {
-        case SET_USERNAME : 
+        case SET_USER : 
             return {
                 ...state,
-                userName : action.payload
-            }
-        case SET_ISSIGNEDIN :
-            return{
-                ...state,
-                isSignedIn: action.payload
+                user : action.payload
             }
         default:
             return state
