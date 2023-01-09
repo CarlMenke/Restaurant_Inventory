@@ -1,5 +1,5 @@
 import { db, auth } from '../firebaseConfig'
-import { ref, onValue, push, update, remove, get , child } from 'firebase/database';
+import { ref, onValue, push, update, remove, get , child, set} from 'firebase/database';
 
 class User {
     constructor(name, hashedPassword){
@@ -19,7 +19,7 @@ class User {
                     hashedPassword: this.hashedPassowrd
                 }
     
-                const res = push(ref(db, `/users/${this.name}`), user)
+                const res = set(ref(db, `/users/${this.name}`), user)
                 return {
                     message: `Added ${this.name} to Database`,
                     completed: true,

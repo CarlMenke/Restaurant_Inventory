@@ -38,7 +38,7 @@ export default function RegistrationScreen() {
     if(password !== "" && userName !== ""){
       await get(child(ref(db), `/users/${userName}`)).then(async (snapshot) => {
         if(snapshot.exists()){
-          const hash = snapshot.child(`${snapshot._node.children_.root_.key}/hashedPassword`)._node.value_
+          const hash = snapshot.val().hashedPassword
           const isSame = await BcryptReactNative.compareSync(password, hash);
           if(isSame){
             const user = new User(userName, hash)
