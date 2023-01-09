@@ -31,7 +31,6 @@ class User {
             console.error(error);
         });
     }
-
 }
 
 export default User

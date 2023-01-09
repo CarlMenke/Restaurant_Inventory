@@ -67,10 +67,13 @@ export default function RegistrationScreen() {
         alignItems: 'center',
         justifyContent: 'center',
       },
+      displayMessage: {
+        fontWeight:'bold'
+      }
     });
   return (
       <View style={styles.container}>
-          <Text>{displayMessage}</Text>
+          <Text style={styles.displayMessage}>{displayMessage}</Text>
           <Text>Login Or Signup</Text>
           <TextInput
             onChangeText = {setUserName}
