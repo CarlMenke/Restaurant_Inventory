@@ -3,7 +3,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { useSelector } from 'react-redux';
 import HomeScreen from './HomeScreen';
-import ViewInventory from './ViewInventory';
+import Businesses from './Businesses';
 import ViewMenuItems from './ViewMenuItems';
 import Account from './Account';
 import RegistrationScreen from './RegistrationScreen.js';
@@ -29,12 +29,12 @@ export default function Navigation() {
             <NavigationContainer>
                 <Tab.Navigator>
                 <Tab.Screen
-                    name="Inventory"
-                    component={ViewInventory}
-                />
-                <Tab.Screen
                     name="Home"
                     component={HomeScreen}
+                />
+                <Tab.Screen
+                    name="Businesses"
+                    component={Businesses}
                 />
                 <Tab.Screen
                     name="Menu"

@@ -7,9 +7,6 @@ import BcryptReactNative from 'bcrypt-react-native';
 import { get, child, ref } from '@firebase/database';
 import { db, auth } from '../firebaseConfig'
 
-
-//const bcrypt = require("bcrypt")
-
 export default function RegistrationScreen() {
 
   const [userName, setUserName] = useState("")
@@ -56,8 +53,6 @@ export default function RegistrationScreen() {
       setDisplayMessage("Please Enter Valid Name And Password")
     }
   }
-
-  //second anuthenticate all the calls to and from the database  (research the professional ways that acceptable with apple)
 
   const styles = StyleSheet.create({
       container: {
