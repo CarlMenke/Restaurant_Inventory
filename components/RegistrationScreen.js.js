@@ -4,12 +4,12 @@ import { useDispatch } from 'react-redux';
 import { setUser } from '../redux/actions';
 import User from "../models/user"
 import BcryptReactNative from 'bcrypt-react-native';
-import { get, child, ref } from '@firebase/database';
-import { db, auth } from '../firebaseConfig'
 
 export default function RegistrationScreen() {
 
-  const [userName, setUserName] = useState("")
+  const [firstName, setFirstName] = useState("")
+  const [lastName, setLastName] = useState("")
+  const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
   const [displayMessage, setDisplayMessage] = useState("")
 
@@ -17,41 +17,24 @@ export default function RegistrationScreen() {
   const setUserAction = (user) => dispatch(setUser(user))
 
   const signup = async () => {
-    if(password !== "" && userName !== ""){
+    const emailRegex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    if(password !== "" && firstName !== "" && lastName !== "" && emailRegex.test(email)){
       const salt = await BcryptReactNative.getSalt(10)
       const hashedPassword = await BcryptReactNative.hash(salt, password);
-      const user = new User(userName, hashedPassword)
+      const user = new User(firstName, lastName, email, hashedPassword)
       const res = await user.addToDataBase()
       if(res ? res.completed : false){
+        console.log(user)
         setUserAction(user)
       }
       setDisplayMessage(res.message)
     }else{
-      setDisplayMessage("Please Enter Valid Name And Password")
+      setDisplayMessage("Invalid Credentials")
     }
   }
 
   const login = async () => {
-    if(password !== "" && userName !== ""){
-      await get(child(ref(db), `/users/${userName}`)).then(async (snapshot) => {
-        if(snapshot.exists()){
-          const hash = snapshot.val().hashedPassword
-          const isSame = await BcryptReactNative.compareSync(password, hash);
-          if(isSame){
-            const user = new User(userName, hash)
-            setUserAction(user)
-          }else{
-            setDisplayMessage("Incorrect Password")
-          }
-        }else{
-          setDisplayMessage("User Not Found.")
-        }
-      }).catch((error) => {
-          console.error(error);
-      });
-    }else{
-      setDisplayMessage("Please Enter Valid Name And Password")
-    }
+
   }
 
   const styles = StyleSheet.create({
@@ -71,13 +54,21 @@ export default function RegistrationScreen() {
           <Text style={styles.displayMessage}>{displayMessage}</Text>
           <Text>Login Or Signup</Text>
           <TextInput
-            onChangeText = {setUserName}
-            value = {userName}
-            placeholder = "Enter Username"/>
+            onChangeText = {setFirstName}
+            value = {firstName}
+            placeholder = "First Name"/>
+          <TextInput 
+            onChangeText = {setLastName}
+            value = {lastName}
+            placeholder = "Last Name"/>
+          <TextInput 
+            onChangeText = {setEmail}
+            value = {email}
+            placeholder = "Email"/>
           <TextInput 
             onChangeText = {setPassword}
             value = {password}
-            placeholder = "Enter Password"/>
+            placeholder = "Password"/>
           <Button
             onPress = {signup}
             title = "Signup" />

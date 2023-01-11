@@ -1,5 +1,4 @@
-import { db, auth } from '../firebaseConfig'
-import { ref, onValue, push, update, remove, get , child, set} from 'firebase/database';
+import { firestore } from '../firebaseConfig'
 
 class Business {
     constructor(name, businessCode){
@@ -8,20 +7,26 @@ class Business {
         this.members = []
         this.adminstrators = []
     }
-    async addToDatabase(user){
-        return await get(child(ref(db), `/businesses/${this.name}`)).then((snapshot) => {
-            if(snapshot.exists()){
-                return {
-                    message: "Business Already Exists",
-                    completed: false
-                }
-            }else{
-                const business = {
-                    name: this.name,
-                    
-                }
+    async addToDataBase(){
+        const userRef = firestore.collection('users').doc(`${this.email}`) 
+        await userRef.set({
+            firstName: this.firstName,
+            lastName: this.lastName,
+            email: this.email,
+            hashedPassowrd: this.hashedPassowrd
+        }).then(() => {
+            return {
+                completed: true,
+                message: "Successfully Signed Up"
+            }
+        }).catch((error) => {
+            return {
+                completed: false,
+                message: "Failed to Sign Up",
+                error: error
             }
         })
+        this.refrence = userRef
     }
     updateName(value) {
         if(value !== ""){
