@@ -66,18 +66,26 @@ export default function RegistrationScreen() {
         fontWeight:'bold'
       }
     });
-  return (
+    return (
       <View style={styles.container}>
           <Text style={styles.displayMessage}>{displayMessage}</Text>
           <Text>Login Or Signup</Text>
           <TextInput
-            onChangeText = {setUserName}
-            value = {userName}
-            placeholder = "Enter Username"/>
+            onChangeText = {setFirstName}
+            value = {firstName}
+            placeholder = "First Name"/>
+          <TextInput 
+            onChangeText = {setLastName}
+            value = {lastName}
+            placeholder = "Last Name"/>
+          <TextInput 
+            onChangeText = {setEmail}
+            value = {email}
+            placeholder = "Email"/>
           <TextInput 
             onChangeText = {setPassword}
             value = {password}
-            placeholder = "Enter Password"/>
+            placeholder = "Password"/>
           <Button
             onPress = {signup}
             title = "Signup" />
