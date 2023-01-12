@@ -6,7 +6,7 @@ import HomeScreen from './HomeScreen';
 import Businesses from './Businesses';
 import ViewMenuItems from './ViewMenuItems';
 import Account from './Account';
-import RegistrationScreen from './RegistrationScreen.js';
+import SignUpScreen from './SignUpScreen.js';
 
 const Tab = createBottomTabNavigator();
 
@@ -18,7 +18,7 @@ export default function Navigation() {
         container: {
           flex: 1,
           flexDirection: "column",
-          backgroundColor: '#ffd',
+          backgroundColor: '#544D57',
           alignItems: 'center',
           justifyContent: 'center',
         },
@@ -26,7 +26,7 @@ export default function Navigation() {
 
       if(user){
         return (
-            <NavigationContainer>
+            <NavigationContainer style={styles.container}>
                 <Tab.Navigator>
                 <Tab.Screen
                     name="Home"
@@ -49,7 +49,7 @@ export default function Navigation() {
         )
       }else{
         return(
-          <RegistrationScreen/>
+          <SignUpScreen/>
         )
       }
 }
